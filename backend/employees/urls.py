@@ -15,7 +15,6 @@ urlpatterns = [
     path('api/attendance/', employees_views.attendance_api, name='attendance_api'),
     path('api/employees/', employees_views.employees_api, name='employees_api'),
     
-    # Catch-all for static files (CSS, JS, images)
-    re_path(r'^(?P<file_path>.+\.(css|js|png|jpg|jpeg|gif|ico))$', 
-            employees_views.serve_static_file, name='static_files'),
+    # Static files pattern - FIXED
+    re_path(r'^assets/(?P<file_path>.*)$', employees_views.serve_static_file, name='static_files'),
 ]
