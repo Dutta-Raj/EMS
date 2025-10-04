@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - Employee Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-800">⏰ Attendance System</h1>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="/dashboard/" class="text-gray-600 hover:text-blue-600 font-medium">Dashboard</a>
+                        <a href="/attendance/" class="text-blue-600 font-semibold border-b-2 border-blue-600 pb-1">Attendance</a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 font-medium">Employees</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <span id="userWelcome" class="text-gray-700 font-medium">Welcome, User</span>
+                    <button data-logout class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Mark Your Attendance</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Check-in Section -->
+                <div class="text-center p-6 border-2 border-dashed border-green-200 rounded-lg bg-green-50">
+                    <div class="text-4xl mb-4">🟢</div>
+                    <h3 class="text-xl font-semibold mb-2 text-green-800">Check In</h3>
+                    <p class="text-green-600 mb-4">Start your work day</p>
+                    <button id="checkInBtn" 
+                            class="bg-green-600 text-white px-8 py-3 rounded-lg attendance-btn hover:bg-green-700 font-semibold text-lg w-full">
+                        Check In Now
+                    </button>
+                    <p id="checkInTime" class="text-sm text-green-600 mt-2"></p>
+                </div>
+
+                <!-- Check-out Section -->
+                <div class="text-center p-6 border-2 border-dashed border-blue-200 rounded-lg bg-blue-50">
+                    <div class="text-4xl mb-4">🔵</div>
+                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Check Out</h3>
+                    <p class="text-blue-600 mb-4">End your work day</p>
+                    <button id="checkOutBtn" 
+                            class="bg-blue-600 text-white px-8 py-3 rounded-lg attendance-btn hover:bg-blue-700 font-semibold text-lg w-full">
+                        Check Out Now
+                    </button>
+                    <p id="checkOutTime" class="text-sm text-blue-600 mt-2"></p>
+                </div>
+            </div>
+
+            <!-- Current Status -->
+            <div id="currentStatus" class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-center">
+                <p class="text-yellow-800">Loading your attendance status...</p>
+            </div>
+        </div>
+
+        <!-- Attendance History -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Attendance History</h2>
+            
+            <!-- Date Filter -->
+            <div class="flex gap-4 mb-6">
+                <input type="date" id="dateFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button id="filterBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">Filter</button>
+                <button id="resetFilter" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600">Reset</button>
+            </div>
+
+            <!-- Attendance Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full table-auto">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Date</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Check In</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Check Out</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Status</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody">
+                        <!-- Attendance data will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="text-center py-8">
+                <div class="loading-spinner mx-auto mb-4"></div>
+                <p class="text-gray-600">Loading attendance data...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="text-center py-8 hidden">
+                <p class="text-gray-600">No attendance records found.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/attendance.js"></script>
+</body>
+</html>

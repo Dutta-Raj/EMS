@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Employee Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold text-gray-800">🏢 HR Dashboard</h1>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="/dashboard/" class="text-blue-600 font-semibold border-b-2 border-blue-600 pb-1">Dashboard</a>
+                        <a href="/attendance/" class="text-gray-600 hover:text-blue-600 font-medium">Attendance</a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 font-medium">Employees</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <span id="userWelcome" class="text-gray-700 font-medium">Welcome, User</span>
+                    <button data-logout class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6 dashboard-card">
+                <div class="flex items-center">
+                    <div class="p-3 bg-blue-100 rounded-lg mr-4">
+                        <span class="text-2xl">👥</span>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">Total Employees</p>
+                        <h3 id="totalEmployees" class="text-2xl font-bold text-gray-800">0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 dashboard-card">
+                <div class="flex items-center">
+                    <div class="p-3 bg-green-100 rounded-lg mr-4">
+                        <span class="text-2xl">✅</span>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">Present Today</p>
+                        <h3 id="presentToday" class="text-2xl font-bold text-gray-800">0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 dashboard-card">
+                <div class="flex items-center">
+                    <div class="p-3 bg-yellow-100 rounded-lg mr-4">
+                        <span class="text-2xl">⏰</span>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">Late Today</p>
+                        <h3 id="lateToday" class="text-2xl font-bold text-gray-800">0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 dashboard-card">
+                <div class="flex items-center">
+                    <div class="p-3 bg-purple-100 rounded-lg mr-4">
+                        <span class="text-2xl">🌴</span>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm">Pending Leaves</p>
+                        <h3 id="pendingLeaves" class="text-2xl font-bold text-gray-800">0</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4 text-gray-800">Attendance Overview</h3>
+                <canvas id="attendanceChart" height="250"></canvas>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4 text-gray-800">Department Distribution</h3>
+                <canvas id="departmentChart" height="250"></canvas>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Recent Activity</h3>
+            <div id="recentActivity" class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                        <span>John Doe checked in</span>
+                    </div>
+                    <span class="text-sm text-gray-500">2 hours ago</span>
+                </div>
+                <!-- Activities will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
