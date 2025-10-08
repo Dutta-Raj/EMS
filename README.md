@@ -1,4 +1,3 @@
-sort read me for guthub
 🏢 Employee Management System
 A comprehensive, industrial-grade employee management and attendance tracking system built with Django.
 
