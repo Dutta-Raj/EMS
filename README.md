@@ -14,8 +14,6 @@ Performance tracking
 ⏰ Attendance System
 Real-time attendance tracking
 
-QR code and biometric support
-
 Shift management and scheduling
 
 Overtime calculation
