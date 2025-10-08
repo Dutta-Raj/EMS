@@ -33,3 +33,4 @@ Workforce analytics
 Role-based access control
 
 Audit logs and activity tracking
+
