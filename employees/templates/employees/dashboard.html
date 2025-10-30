@@ -1,0 +1,99 @@
+{% extends 'employees/base.html' %}
+
+{% block title %}Dashboard - Employee Management System{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h1>
+    <p class="lead">Overview of your employee management system</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card stats-card text-white bg-primary">
+            <div class="card-body text-center">
+                <i class="fas fa-users fa-3x mb-3"></i>
+                <h5 class="card-title">Total Employees</h5>
+                <h2 class="display-4">{{ total_employees }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card stats-card text-white bg-success">
+            <div class="card-body text-center">
+                <i class="fas fa-user-check fa-3x mb-3"></i>
+                <h5 class="card-title">Active Employees</h5>
+                <h2 class="display-4">{{ active_employees }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card stats-card text-white bg-info">
+            <div class="card-body text-center">
+                <i class="fas fa-sitemap fa-3x mb-3"></i>
+                <h5 class="card-title">Departments</h5>
+                <h2 class="display-4">{{ total_departments }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+                <div class="d-grid gap-2 d-md-flex">
+                    <a href="{% url 'employee_list' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-users me-2"></i>View All Employees
+                    </a>
+                    <a href="{% url 'department_list' %}" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-sitemap me-2"></i>View Departments
+                    </a>
+                    <a href="/admin/" class="btn btn-outline-dark btn-lg" target="_blank">
+                        <i class="fas fa-cog me-2"></i>Admin Panel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-chart-line me-2"></i>System Status</h5>
+                <div class="list-group">
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Database Status
+                        <span class="badge bg-success">Connected</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Application Status
+                        <span class="badge bg-success">Running</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Last Updated
+                        <span class="text-muted">Just now</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-info-circle me-2"></i>Getting Started</h5>
+                <p>Welcome to your Employee Management System! Here are some things you can do:</p>
+                <ul>
+                    <li>View and manage employees</li>
+                    <li>Organize employees by departments</li>
+                    <li>Use the admin panel for advanced management</li>
+                    <li>Track attendance and leave records</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
