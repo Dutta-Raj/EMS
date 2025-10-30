@@ -35,5 +35,5 @@ Follow these steps to run the project locally:
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/Dutta-Raj/EMS.git
-cd EMS
+git clone https://github.com/Dutta-Raj/Employee-Management-Syatem.git
+cd Employee-Management-Syatem
