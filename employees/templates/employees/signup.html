@@ -1,0 +1,65 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Sign Up - Employee Management System</title> 
+    <style> 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; } 
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; } 
+        .signup-container { background: white; border-radius: 10px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%; max-width: 400px; padding: 40px; } 
+        .logo { text-align: center; margin-bottom: 30px; } 
+        .logo h1 { color: #333; font-size: 24px; font-weight: 600; margin-bottom: 8px; } 
+        .logo p { color: #666; font-size: 14px; } 
+        .form-group { margin-bottom: 20px; } 
+        .form-group label { display: block; margin-bottom: 8px; color: #555; font-weight: 500; } 
+        .form-group input { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; } 
+        .form-group input:focus { border-color: #667eea; outline: none; } 
+        .signup-btn { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: 600; cursor: pointer; } 
+        .signup-btn:hover { background: #218838; } 
+        .login-link { text-align: center; margin-top: 20px; } 
+        .login-link a { color: #667eea; text-decoration: none; } 
+        .error-message { color: #e74c3c; text-align: center; margin-top: 15px; padding: 10px; background: #ffeaea; border-radius: 5px; font-size: 14px; } 
+        .footer { text-align: center; margin-top: 20px; color: #777; font-size: 12px; } 
+    </style> 
+</head> 
+<body> 
+    <div class="signup-container"> 
+        <div class="logo"> 
+            <h1>Create Account</h1> 
+            <p>Join Employee Management System</p> 
+        </div> 
+        <form method="POST"> 
+            {% csrf_token %} 
+            <div class="form-group"> 
+                <label for="username">Username</label> 
+                <input type="text" id="username" name="username" placeholder="Choose username" required> 
+            </div> 
+            <div class="form-group"> 
+                <label for="email">Email</label> 
+                <input type="email" id="email" name="email" placeholder="Enter your email" required> 
+            </div> 
+            <div class="form-group"> 
+                <label for="password1">Password</label> 
+                <input type="password" id="password1" name="password1" placeholder="Enter password" required> 
+            </div> 
+            <div class="form-group"> 
+                <label for="password2">Confirm Password</label> 
+                <input type="password" id="password2" name="password2" placeholder="Confirm password" required> 
+            </div> 
+            <button type="submit" class="signup-btn">Create Account</button> 
+            {% if error %} 
+            <div class="error-message"> 
+                {{ error }} 
+            </div> 
+            {% endif %} 
+        </form> 
+        <div class="login-link"> 
+            <p>Already have an account? <a href="/login/">Sign In</a></p> 
+        </div> 
+        <div class="footer"> 
+            <p>Employee Management System &copy; 2024</p> 
+        </div> 
+    </div> 
+</body> 
+</html> 

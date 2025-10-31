@@ -1,99 +1,85 @@
-{% extends 'employees/base.html' %}
-
-{% block title %}Dashboard - Employee Management System{% endblock %}
-
-{% block content %}
-<div class="page-header">
-    <h1><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h1>
-    <p class="lead">Overview of your employee management system</p>
-</div>
-
-<div class="row">
-    <div class="col-md-4 mb-4">
-        <div class="card stats-card text-white bg-primary">
-            <div class="card-body text-center">
-                <i class="fas fa-users fa-3x mb-3"></i>
-                <h5 class="card-title">Total Employees</h5>
-                <h2 class="display-4">{{ total_employees }}</h2>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 mb-4">
-        <div class="card stats-card text-white bg-success">
-            <div class="card-body text-center">
-                <i class="fas fa-user-check fa-3x mb-3"></i>
-                <h5 class="card-title">Active Employees</h5>
-                <h2 class="display-4">{{ active_employees }}</h2>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 mb-4">
-        <div class="card stats-card text-white bg-info">
-            <div class="card-body text-center">
-                <i class="fas fa-sitemap fa-3x mb-3"></i>
-                <h5 class="card-title">Departments</h5>
-                <h2 class="display-4">{{ total_departments }}</h2>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row mt-4">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
-                <div class="d-grid gap-2 d-md-flex">
-                    <a href="{% url 'employee_list' %}" class="btn btn-primary btn-lg">
-                        <i class="fas fa-users me-2"></i>View All Employees
-                    </a>
-                    <a href="{% url 'department_list' %}" class="btn btn-secondary btn-lg">
-                        <i class="fas fa-sitemap me-2"></i>View Departments
-                    </a>
-                    <a href="/admin/" class="btn btn-outline-dark btn-lg" target="_blank">
-                        <i class="fas fa-cog me-2"></i>Admin Panel
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row mt-4">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-chart-line me-2"></i>System Status</h5>
-                <div class="list-group">
-                    <div class="list-group-item d-flex justify-content-between align-items-center">
-                        Database Status
-                        <span class="badge bg-success">Connected</span>
-                    </div>
-                    <div class="list-group-item d-flex justify-content-between align-items-center">
-                        Application Status
-                        <span class="badge bg-success">Running</span>
-                    </div>
-                    <div class="list-group-item d-flex justify-content-between align-items-center">
-                        Last Updated
-                        <span class="text-muted">Just now</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-info-circle me-2"></i>Getting Started</h5>
-                <p>Welcome to your Employee Management System! Here are some things you can do:</p>
-                <ul>
-                    <li>View and manage employees</li>
-                    <li>Organize employees by departments</li>
-                    <li>Use the admin panel for advanced management</li>
-                    <li>Track attendance and leave records</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Dashboard - Employee Management System</title> 
+    <style> 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; } 
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; color: #2d3748; } 
+        .navbar { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 1rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; } 
+        .navbar h1 { color: #4a5568; font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; } 
+        .nav-links a { color: #4a5568; text-decoration: none; margin-left: 2rem; font-weight: 500; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 8px; } 
+        .nav-links a:hover { background: #667eea; color: white; transform: translateY(-2px); } 
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; } 
+        .hero-section { text-align: center; padding: 4rem 2rem; color: white; } 
+        .hero-section h2 { font-size: 3.5rem; font-weight: 300; margin-bottom: 1rem; opacity: 0.9; } 
+        .hero-section p { font-size: 1.3rem; opacity: 0.8; max-width: 600px; margin: 0 auto 2rem; } 
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 3rem 0; } 
+        .stat-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 2.5rem; border-radius: 20px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; } 
+        .stat-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); } 
+        .stat-number { font-size: 3.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem; text-shadow: 0 4px 8px rgba(0,0,0,0.2); } 
+        .stat-label { color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; font-weight: 500; } 
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; } 
+        .feature-card { background: white; padding: 2.5rem; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s ease; cursor: pointer; border: none; } 
+        .feature-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.15); } 
+        .feature-icon { font-size: 3rem; margin-bottom: 1.5rem; } 
+        .feature-card h3 { color: #2d3748; font-size: 1.4rem; margin-bottom: 1rem; font-weight: 600; } 
+        .feature-card p { color: #718096; line-height: 1.6; margin-bottom: 1.5rem; } 
+        .feature-btn { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; } 
+        .feature-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4); } 
+        .welcome-badge { background: rgba(255, 255, 255, 0.2); padding: 0.5rem 1.5rem; border-radius: 50px; display: inline-block; margin-bottom: 1rem; font-size: 0.9rem; } 
+    </style> 
+</head> 
+<body> 
+    <div class="navbar"> 
+        <h1>?? EmployeePro</h1> 
+        <div class="nav-links"> 
+            <a href="/employees/">?? Employees</a> 
+            <a href="/departments/">?? Departments</a> 
+            {% if user.is_staff %} 
+            <a href="/admin/" style="background: #e53e3e; color: white;">?? Admin</a> 
+            {% endif %} 
+            <a href="/logout/">?? Logout</a> 
+        </div> 
+    </div> 
+    <div class="container"> 
+        <div class="hero-section"> 
+            <div class="welcome-badge">Welcome back</div> 
+            <h2>Hello, {{ user.username }}!</h2> 
+            <p>Streamline your workforce management with our powerful employee management system</p> 
+        </div> 
+        <div class="stats-grid"> 
+            <div class="stat-card"> 
+                <div class="stat-label">Total Employees</div> 
+            </div> 
+            <div class="stat-card"> 
+                <div class="stat-label">Departments</div> 
+            </div> 
+            <div class="stat-card"> 
+                <div class="stat-number">100%</div> 
+                <div class="stat-label">System Online</div> 
+            </div> 
+        </div> 
+        <div class="features-grid"> 
+            <div class="feature-card" onclick="window.location.href='/employees/'"> 
+                <div class="feature-icon">??</div> 
+                <h3>Employee Directory</h3> 
+                <p>Browse and manage all employee records, contact information, and employment details in one centralized location.</p> 
+                <button class="feature-btn">View Employees</button> 
+            </div> 
+            <div class="feature-card" onclick="window.location.href='/departments/'"> 
+                <div class="feature-icon">??</div> 
+                <h3>Department Management</h3> 
+                <p>Organize your company structure by departments, track team members, and maintain organizational hierarchy.</p> 
+                <button class="feature-btn">View Departments</button> 
+            </div> 
+            <div class="feature-card"> 
+                <div class="feature-icon">??</div> 
+                <p>Generate comprehensive reports and gain insights into your workforce with advanced analytics and visualization tools.</p> 
+                <button class="feature-btn" style="background: #48bb78;">Coming Soon</button> 
+            </div> 
+        </div> 
+    </div> 
+</body> 
+</html> 
